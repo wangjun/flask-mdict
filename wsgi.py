@@ -20,17 +20,17 @@ def create_app():
     import mdict
     mdict.init_app(app)
 
+    @app.route('/')
+    def index():
+        return redirect(url_for('mdict.query_word2'))
+
+    @app.route('/favicon.ico')
+    def favicon_ico():
+        return redirect(url_for('static', filename='logo.png'))
+
     return app
 
 
-app = create_app()
-
-
-@app.route('/')
-def index():
-    return redirect(url_for('mdict.query_word2'))
-
-
-@app.route('/favicon.ico')
-def favicon_ico():
-    return redirect(url_for('static', filename='logo.png'))
+if __name__ == '__main__':
+    app = create_app()
+    app.run()
