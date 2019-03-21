@@ -1,7 +1,7 @@
 
 import os.path
 
-from flask import Flask
+from flask import Flask, redirect, url_for
 
 
 def create_app():
@@ -24,3 +24,13 @@ def create_app():
 
 
 app = create_app()
+
+
+@app.route('/')
+def index():
+    return redirect(url_for('mdict.query_word2'))
+
+
+@app.route('/favicon.ico')
+def favicon_ico():
+    return redirect(url_for('static', filename='logo.png'))
