@@ -13,12 +13,8 @@ def create_app():
     # css/png/jpg file are cached in memory
     app.config["MDICT_CACHE"] = False
 
-    # fix blueprint directory
-    import sys
-    sys.path.append(os.path.dirname(os.path.abspath('')))
-
-    import mdict
-    mdict.init_app(app)
+    from . import init_app
+    init_app(app)
 
     @app.route('/')
     def index():
