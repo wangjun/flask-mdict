@@ -10,8 +10,11 @@ def create_app():
 
     # mdict directory
     app.config["MDICT_DIR"] = 'content'
-    # css/png/jpg file are cached in memory
-    app.config["MDICT_CACHE"] = False
+    # css/js/png/jpg file are cached in memory
+    if app.debug:
+        app.config["MDICT_CACHE"] = False
+    elif "MDICT_CACHE" not in app.config:
+        app.config["MDICT_CACHE"] = True
 
     from . import init_app
     init_app(app)
